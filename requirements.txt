@@ -1,0 +1,13 @@
+streamlit
+google.generativeai
+python-dotenv
+langchain
+langchain_google_genai
+pathlib
+matplotlib
+xgboost
+lightgbm
+scikit-learn
+
+
+
