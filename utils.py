@@ -183,8 +183,8 @@ def crowding_sort(df,sol,n):
   sorted_df['dist'] = 0
 
   # Set the first and last rows to contain 'infinite'
-  sorted_df.loc[0, 'dist'] = np.inf
-  sorted_df.loc[len(sorted_df) - 1, 'dist'] = np.inf
+  sorted_df.loc[0, 'dist'] = 99999.000  #np.inf
+  sorted_df.loc[len(sorted_df) - 1, 'dist'] = 99999.000  ##np.inf
 
   F1_max = 1
   F1_min = 0.1
@@ -210,7 +210,7 @@ def crowding_sort(df,sol,n):
       F2_next = sorted_df.at[i + 1, 'F2']
 
       updated_value = previous_value + (F2_next-F2_previous) / (F2_max - F2_min)
-      sorted_df.at[i, 'dist'] = round(updated_value,2)
+      sorted_df.at[i, 'dist'] = round(float(updated_value),2)
   top_n_sol_no = sorted_df.sort_values(by='dist', ascending=False)['sol_no'].head(n).tolist()
 
   return top_n_sol_no
