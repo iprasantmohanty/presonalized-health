@@ -210,7 +210,7 @@ def crowding_sort(df,sol,n):
       F2_next = sorted_df.at[i + 1, 'F2']
 
       updated_value = previous_value + (F2_next-F2_previous) / (F2_max - F2_min)
-      sorted_df.at[i, 'dist'] = round(float(updated_value),2)
+      sorted_df.at[i, 'dist'] = updated_value #3round(float(updated_value),2)
   top_n_sol_no = sorted_df.sort_values(by='dist', ascending=False)['sol_no'].head(n).tolist()
 
   return top_n_sol_no
