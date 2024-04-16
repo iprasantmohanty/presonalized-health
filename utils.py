@@ -180,7 +180,9 @@ def crowding_sort(df,sol,n):
   sorted_df.reset_index(drop=True, inplace=True)
 
   # Add a 'dist' column and initialize it to 0
-  sorted_df['dist'] = 0
+  sorted_df['dist'] = 0.0
+  # Convert the 'dist' column to a compatible dtype, such as float64 or object
+  sorted_df['dist'] = sorted_df['dist'].astype(float)
 
   # Set the first and last rows to contain 'infinite'
   sorted_df.loc[0, 'dist'] = 99999.000  #np.inf
@@ -192,7 +194,6 @@ def crowding_sort(df,sol,n):
       previous_value = sorted_df.at[i, 'dist']
       F1_previous = sorted_df.at[i - 1, 'F1']
       F1_next = sorted_df.at[i + 1, 'F1']
-
       updated_value = previous_value + (F1_next-F1_previous) / (F1_max - F1_min)
       sorted_df.at[i, 'dist'] = round(updated_value,2)
 
@@ -208,9 +209,8 @@ def crowding_sort(df,sol,n):
       previous_value = sorted_df.at[i, 'dist']
       F2_previous = sorted_df.at[i - 1, 'F2']
       F2_next = sorted_df.at[i + 1, 'F2']
-
       updated_value = previous_value + (F2_next-F2_previous) / (F2_max - F2_min)
-      sorted_df.at[i, 'dist'] = updated_value #3round(float(updated_value),2)
+      sorted_df.at[i, 'dist'] = round(updated_value,2)
   top_n_sol_no = sorted_df.sort_values(by='dist', ascending=False)['sol_no'].head(n).tolist()
 
   return top_n_sol_no
@@ -571,7 +571,8 @@ def decode_results(all_best_solutions,fit_val):
     #df=df.append(pd.Series(feature_values, index=feature_names), ignore_index=True)
     new_df = pd.DataFrame([feature_values], columns=feature_names)
     # Concatenate the new DataFrame with the original DataFrame along axis 0 (rows)
-    df = pd.concat([df, new_df], ignore_index=True)
+    if not new_df.empty and not new_df.isna().all().all():
+      df = pd.concat([df, new_df], ignore_index=True)
 
     
     df['Heart Stroke'] = 0.0  # Initialize with default values
@@ -579,8 +580,8 @@ def decode_results(all_best_solutions,fit_val):
 
     # Iterate over the rows and update the new columns with values from the matrix
     for i in range(min(len(df), len(fit_val))):
-        df.at[i, 'Heart Stroke'] = fit_val[i][0]
-        df.at[i, 'Diabetes'] = fit_val[i][1]
+        df.at[i, 'Heart Stroke'] = float(fit_val[i][0])
+        df.at[i, 'Diabetes'] = float(fit_val[i][1])
   return df
 
 
