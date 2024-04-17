@@ -162,10 +162,10 @@ if submit3:
     indices_to_edit = [3, 4, 15, 16, 17, 18, 19]  # Indices for which you want to edit min and max values
 
     for i, j in enumerate(indices_to_edit):
-        st.write(f"feature '{continuous_features[i]}' has min value = {MIN_VAL[j]} and max value = {MAX_VAL[j]}")
+        st.subheader(f"Range of '{continuous_features[i]}' is [ {MIN_VAL[j]} --> {MAX_VAL[j]} ]")
     
 
-question4=st.text_input("Among these features, enter your value for the feature : ",key="input4")
+question4=st.text_input("Among these feature ranges, enter your value for the feature : ",key="input4")
 submit4=st.button("Save Features values")  
 
 if submit4:
@@ -185,8 +185,9 @@ if submit4:
     except ValueError:
         st.error("Please enter a valid input")
 
-
-question5=st.text_input("Enter number of counterfactuals needed : ",key="input5")
+st.markdown("<h2>Enter number of counterfactuals needed:</h2>", unsafe_allow_html=True)
+question5 = st.number_input("", key="input5")
+#question5=st.text_input("Enter number of counterfactuals needed : ",key="input5")
 submit5=st.button("Show all Counterfactuals") 
 
 
@@ -200,17 +201,18 @@ if submit5:
         fit_val.append(fv)
     df=decode_results(all_best_solutions,fit_val)
     print(df)
-    st.write(df)
+    st.subheader(df)
     # Get the maximum value of the 'Heart Stroke' column
     max_heart_stroke = float(df['Heart Stroke'].max())
-    print(max_heart_stroke)
-    print(f"type = {type(max_heart_stroke)}")
+    #print(max_heart_stroke)
+    #print(f"type = {type(max_heart_stroke)}")
     # Format and print the maximum probability as a percentage
     max_heart_stroke_percentage = max_heart_stroke * 100
     # Get the maximum value of the 'Diabetes' column
     max_diabetes = float(df['Diabetes'].max())
     # Format and print the maximum probability as a percentage
     max_diabetes_percentage = max_diabetes * 100
+    st.subheader("Can adopt any one of the above counterfactuals.")
     st.subheader(f'Maximum probability of getting "Heart Stroke" is {max_heart_stroke_percentage:.4f}%')
     st.subheader(f'Maximum probability of getting "Diabetes" is {max_diabetes_percentage:.4f}%')
 
