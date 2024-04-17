@@ -106,7 +106,7 @@ if submit1:
         print(query1)
         #st.text(f"SQL is {query1}")
         response1=read_sql_query(query1,"multi_diseases.db")
-        st.subheader("The options for all selected features are")
+        st.subheader("The options for all selected features are --")
         i=1
         for row in response1:
             display_text = []
@@ -165,7 +165,7 @@ if submit3:
     for i, j in enumerate(indices_to_edit):
         st.subheader(f"Range of '{continuous_features[i]}' is [ {MIN_VAL[j]} --> {MAX_VAL[j]} ]")
     
-st.markdown("<h2>Among these feature ranges, enter your value for the feature :</h2>", unsafe_allow_html=True)
+st.markdown("<h2>Among these feature ranges, enter your value for the feature(s) :</h2>", unsafe_allow_html=True)
 question4=st.text_input("",key="input4")
 submit4=st.button("Save Features values")  
 
