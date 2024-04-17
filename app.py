@@ -105,7 +105,7 @@ if submit1:
         print(query1)
         #st.text(f"SQL is {query1}")
         response1=read_sql_query(query1,"multi_diseases.db")
-        st.subheader("The Response is")
+        st.subheader("The options for all selected features are")
         i=1
         for row in response1:
             display_text = []
@@ -116,9 +116,9 @@ if submit1:
             if display_text:  # Check if there are any non-None elements to display
                 print(display_text)
                 if display_text[0].lower() == 'age':
-                    st.write(f"feature-{i} is {display_text[0]}")
+                    st.subheader(f"feature-{i} is {display_text[0]}")
                 else:
-                    st.write(f"feature-{i} is {display_text[0]} having option(s) {display_text[1:]}")
+                    st.subheader(f"feature-{i} is {display_text[0]} having option(s) {display_text[1:]}")
                 i += 1
     except ValueError:
         st.error("Please enter a valid input")
