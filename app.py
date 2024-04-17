@@ -72,10 +72,12 @@ prompt1=[
 ]
 ## Streamlit App
 
-st.set_page_config(page_title="🏥Personalized-Health Recommendation")
-st.header("🏥Personalized Health Recommendation System😷")
-
-question=st.text_input("Ask to show all the features: ",key="input")
+#st.set_page_config(page_title="🏥Personalized-Health Recommendation")
+st.title("🏥Personalized-Health Recommendation")
+st.markdown("<h1><span style='color:blue'>🏥Personalized Health Recommendation System😷</span></h1>", unsafe_allow_html=True)
+#st.header("")
+st.markdown("<h2>Ask to show all the features:</h2>", unsafe_allow_html=True)
+question=st.text_input("",key="input")
 
 submit=st.button("Show Features")
 
@@ -95,8 +97,8 @@ if submit:
     except ValueError:
         st.error("Please enter a valid input")
 
-
-question1=st.text_input("Among these, pick which are to make constant (fix) : ",key="input1")
+st.markdown("<h2>Among these, pick which are to make constant (fix) :</h2>", unsafe_allow_html=True)
+question1=st.text_input("",key="input1")
 submit1=st.button("Fix Features")
 
 if submit1:
@@ -123,8 +125,8 @@ if submit1:
     except ValueError:
         st.error("Please enter a valid input")
 
-
-question2=st.text_input("Enter your option for these above features : ",key="input2")
+st.markdown("<h2>Enter your option for these above features :</h2>", unsafe_allow_html=True)
+question2=st.text_input("",key="input2")
 submit2=st.button("Set Feature Options")
 prompt2=[
     """
@@ -164,8 +166,8 @@ if submit3:
     for i, j in enumerate(indices_to_edit):
         st.subheader(f"Range of '{continuous_features[i]}' is [ {MIN_VAL[j]} --> {MAX_VAL[j]} ]")
     
-
-question4=st.text_input("Among these feature ranges, enter your value for the feature : ",key="input4")
+st.markdown("<h2>Among these feature ranges, enter your value for the feature :</h2>", unsafe_allow_html=True)
+question4=st.text_input("",key="input4")
 submit4=st.button("Save Features values")  
 
 if submit4:
@@ -186,7 +188,7 @@ if submit4:
         st.error("Please enter a valid input")
 
 st.markdown("<h2>Enter number of counterfactuals needed:</h2>", unsafe_allow_html=True)
-question5 = st.number_input("", key="input5")
+question5 = st.number_input("", key="input5", value=1, step=1, format="%d")
 #question5=st.text_input("Enter number of counterfactuals needed : ",key="input5")
 submit5=st.button("Show all Counterfactuals") 
 
@@ -201,7 +203,7 @@ if submit5:
         fit_val.append(fv)
     df=decode_results(all_best_solutions,fit_val)
     print(df)
-    st.subheader(df)
+    st.write(df)
     # Get the maximum value of the 'Heart Stroke' column
     max_heart_stroke = float(df['Heart Stroke'].max())
     #print(max_heart_stroke)
