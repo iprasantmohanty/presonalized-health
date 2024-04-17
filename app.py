@@ -72,10 +72,10 @@ prompt1=[
 ]
 ## Streamlit App
 
-st.set_page_config(page_title="Health Recommendation")
-st.header("Personalized Health Recommendation System")
+st.set_page_config(page_title="🏥Personalized-Health Recommendation")
+st.header("🏥Personalized Health Recommendation System😷")
 
-question=st.text_input("Ask to show the features: ",key="input")
+question=st.text_input("Ask to show all the features: ",key="input")
 
 submit=st.button("Show Features")
 
@@ -85,25 +85,25 @@ if submit:
         query=get_gemini_response(question,prompt)
         print(query)
         response=read_sql_query(query,"multi_diseases.db")
-        st.text(f"SQL is {query}")
+        #st.text(f"SQL is {query}")
         st.subheader("The features are --")
         i=1
         for row in response:
             print(row)
-            st.text(f"feature-{i} is {row[0]}")
+            st.subheader(f"feature-{i} is {row[0]}")
             i=i+1
     except ValueError:
         st.error("Please enter a valid input")
 
 
-question1=st.text_input("Among these, pick which are to make constant : ",key="input1")
+question1=st.text_input("Among these, pick which are to make constant (fix) : ",key="input1")
 submit1=st.button("Fix Features")
 
 if submit1:
     try:
         query1=get_gemini_response(question1,prompt1)
         print(query1)
-        st.text(f"SQL is {query1}")
+        #st.text(f"SQL is {query1}")
         response1=read_sql_query(query1,"multi_diseases.db")
         st.subheader("The Response is")
         i=1
@@ -118,14 +118,14 @@ if submit1:
                 if display_text[0].lower() == 'age':
                     st.write(f"feature-{i} is {display_text[0]}")
                 else:
-                    st.write(f"feature-{i} is {display_text[0]} having option {display_text[1:]}")
+                    st.write(f"feature-{i} is {display_text[0]} having option(s) {display_text[1:]}")
                 i += 1
     except ValueError:
         st.error("Please enter a valid input")
 
 
-question2=st.text_input("Enter value for these above features : ",key="input2")
-submit2=st.button("Give Feature values")
+question2=st.text_input("Enter your option for these above features : ",key="input2")
+submit2=st.button("Set Feature Options")
 prompt2=[
     """
     You are expert in understanding context of the word.
@@ -143,8 +143,10 @@ if submit2:
         query2=get_gemini_response(question2,prompt2)
         feature_dict=eval(query2)
         print(feature_dict)
-        st.subheader("The Response is")
-        st.text(feature_dict)
+        #st.subheader("The Response is")
+        #st.text(feature_dict)
+        for feature, option in feature_dict.items():
+            st.subheader(f"'{feature}' is set to '{option}'")
         feature_list=list(feature_dict.keys())
         MIN_VAL, MAX_VAL=update_features(feature_dict)
         print(feature_list)
@@ -152,7 +154,7 @@ if submit2:
     except ValueError:
         st.error("Please enter a valid input")
 
-submit3=st.button("Show Continuous features")
+submit3=st.button("Show features having Continuous values")
 
 if submit3:
     continuous_features = ['avg_glucose_level', 'bmi', 'Pregnancies', 'hypertension_cont', 'SkinThickness', 'Insulin',
@@ -163,7 +165,7 @@ if submit3:
         st.write(f"feature '{continuous_features[i]}' has min value = {MIN_VAL[j]} and max value = {MAX_VAL[j]}")
     
 
-question4=st.text_input("Among these features, enter your body feature value : ",key="input4")
+question4=st.text_input("Among these features, enter your value for the feature : ",key="input4")
 submit4=st.button("Save Features values")  
 
 if submit4:
@@ -171,8 +173,10 @@ if submit4:
         query4=get_gemini_response(question4,prompt2)
         cont_feature_dict=eval(query4)
         print(cont_feature_dict)
-        st.subheader("The Response is")
-        st.text(cont_feature_dict)
+        #st.subheader("The Response is")
+        #st.text(cont_feature_dict)
+        for feature, option in cont_feature_dict.items():
+            st.subheader(f"'{feature}' is set to '{option}'")
         cont_feature_list=list(cont_feature_dict.keys())
         MIN_VAL, MAX_VAL=cont_update_features(cont_feature_dict)
         print(cont_feature_list)
@@ -183,7 +187,7 @@ if submit4:
 
 
 question5=st.text_input("Enter number of counterfactuals needed : ",key="input5")
-submit5=st.button("Show Counterfactuals") 
+submit5=st.button("Show all Counterfactuals") 
 
 
 if submit5:
@@ -211,4 +215,12 @@ if submit5:
     st.subheader(f'Maximum probability of getting "Diabetes" is {max_diabetes_percentage:.4f}%')
 
 
-st.subheader("for more details contact - prasantmohanty.r@gmail.com")
+#st.subheader("for more details contact - prasantmohanty.r@gmail.com")
+st.markdown(
+        """
+        <div style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #0E1117; padding: 15px; text-align: center;">
+           AI App created by @ <a href="" target="_blank">Prasant Kumar Mohanty</a> | Made with Google Gemini Pro 
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
