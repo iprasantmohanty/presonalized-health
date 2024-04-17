@@ -72,8 +72,7 @@ prompt1=[
 ]
 ## Streamlit App
 
-#st.set_page_config(page_title="🏥Personalized-Health Recommendation")
-st.title("🏥Personalized-Health Recommendation")
+st.set_page_config(page_title="Personalized-Health",page_icon="🏥")
 st.markdown("<h1><span style='color:blue'>🏥Personalized Health Recommendation System😷</span></h1>", unsafe_allow_html=True)
 #st.header("")
 st.markdown("<h2>Ask to show all the features:</h2>", unsafe_allow_html=True)
