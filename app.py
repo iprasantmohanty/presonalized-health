@@ -106,9 +106,9 @@ if submit1:
         print(query1)
         #st.text(f"SQL is {query1}")
         response1=read_sql_query(query1,"multi_diseases.db")
-        st.subheader('feature(s) made constant: ')
+        st.subheader('feature(s) made constant -- ')
         for row in response1:
-            print(row[0])
+            st.subheader(row[0])
 
         st.subheader("The options for all selected features are --")
         i=1
