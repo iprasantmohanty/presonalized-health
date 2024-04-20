@@ -75,8 +75,8 @@ prompt1=[
 st.set_page_config(page_title="Personalized-Health",page_icon="🏥")
 st.markdown("<h1><span style='color:blue'>🏥Personalized Health Recommendation System😷</span></h1>", unsafe_allow_html=True)
 #st.header("")
-st.markdown("<h2>Ask to show all the features:</h2>", unsafe_allow_html=True)
-question=st.text_input("",key="input")
+st.markdown("<h3>Ask to show all the features:</h3>", unsafe_allow_html=True)
+question=st.text_input(" ",key="input")
 
 submit=st.button("Show Features")
 
@@ -96,8 +96,8 @@ if submit:
     except ValueError:
         st.error("Please enter a valid input")
 
-st.markdown("<h2>Among these, pick which are to make constant (fix) :</h2>", unsafe_allow_html=True)
-question1=st.text_input("",key="input1")
+st.markdown("<h3>Among these, pick which are to make constant (fix) :</h3>", unsafe_allow_html=True)
+question1=st.text_input(" ",key="input1")
 submit1=st.button("Fix Features")
 
 if submit1:
@@ -128,8 +128,8 @@ if submit1:
     except ValueError:
         st.error("Please enter a valid input")
 
-st.markdown("<h2>Enter your option for these above features :</h2>", unsafe_allow_html=True)
-question2=st.text_input("",key="input2")
+st.markdown("<h3>Enter your option for these above features :</h3>", unsafe_allow_html=True)
+question2=st.text_input(" ",key="input2")
 submit2=st.button("Set Feature Options")
 prompt2=[
     """
@@ -166,12 +166,12 @@ if submit3:
                         'DiabetesPedigreeFunction']
     
     indices_to_edit = [3, 4, 15, 16, 17, 18, 19]  # Indices for which you want to edit min and max values
-
+   
     for i, j in enumerate(indices_to_edit):
         st.subheader(f"Range of '{continuous_features[i]}' is [ {MIN_VAL[j]} --> {MAX_VAL[j]} ]")
     
-st.markdown("<h2>Among these feature ranges, enter your value for the feature(s) :</h2>", unsafe_allow_html=True)
-question4=st.text_input("",key="input4")
+st.markdown("<h3>Among these feature ranges, enter your value for the feature(s) :</h3>", unsafe_allow_html=True)
+question4=st.text_input(" ",key="input4")
 submit4=st.button("Save Features values")  
 
 if submit4:
@@ -186,13 +186,14 @@ if submit4:
         cont_feature_list=list(cont_feature_dict.keys())
         MIN_VAL, MAX_VAL=cont_update_features(cont_feature_dict)
         print(cont_feature_list)
+     
         #st.write(MIN_VAL)
         #st.write(MAX_VAL)
     except ValueError:
         st.error("Please enter a valid input")
 
-st.markdown("<h2>Enter number of counterfactuals needed:</h2>", unsafe_allow_html=True)
-question5 = st.number_input("", key="input5", value=1, step=1, format="%d")
+st.markdown("<h3>Enter number of counterfactuals needed:</h3>", unsafe_allow_html=True)
+question5 = st.number_input(" ", key="input5", value=1, step=1, format="%d")
 #question5=st.text_input("Enter number of counterfactuals needed : ",key="input5")
 submit5=st.button("Show all Counterfactuals") 
 

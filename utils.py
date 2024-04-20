@@ -574,7 +574,10 @@ def decode_results(all_best_solutions,fit_val):
     new_df = pd.DataFrame([feature_values], columns=feature_names)
     # Concatenate the new DataFrame with the original DataFrame along axis 0 (rows)
     if not new_df.empty and not new_df.isna().all().all():
-      df = pd.concat([df, new_df], ignore_index=True)
+      # Exclude empty or all-NA columns before concatenation
+      columns_to_concat = [col for col in new_df.columns if not new_df[col].isnull().all()]
+      df = pd.concat([df, new_df[columns_to_concat]], ignore_index=True)
+      #df = pd.concat([df, new_df], ignore_index=True)
 
     
     df['Heart Stroke'] = 0.0  # Initialize with default values
@@ -590,6 +593,7 @@ def decode_results(all_best_solutions,fit_val):
 
 
 def update_features(feature_dict):
+    global MIN_VAL, MAX_VAL  # Declare as global to modify the global variables
     MIN_VAL = [0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0.078] # min possible values of decision variables
     MAX_VAL = [82, 1, 1, 272.0, 98.0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 122.0, 99, 846.0, 2.42] # max possible values of decision variables
     for i, entry in enumerate(feature_dict):
