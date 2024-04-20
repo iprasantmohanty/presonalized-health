@@ -164,8 +164,7 @@ submit3=st.button("Show features having Continuous values")
 if submit3:
     continuous_features = ['avg_glucose_level', 'bmi', 'Pregnancies', 'hypertension_cont', 'SkinThickness', 'Insulin',
                         'DiabetesPedigreeFunction']
-    MIN_VAL = [0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0.078] # min possible values of decision variables
-    MAX_VAL = [82, 1, 1, 272.0, 98.0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 122.0, 99, 846.0, 2.42] # max possible values of decision variables
+    
     indices_to_edit = [3, 4, 15, 16, 17, 18, 19]  # Indices for which you want to edit min and max values
 
     for i, j in enumerate(indices_to_edit):

@@ -10,7 +10,7 @@ MIN_VAL = [0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0.078
 MAX_VAL = [82, 1, 1, 272.0, 98.0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 122.0, 99, 846.0, 2.42] # max possible values of decision variables
 sigma_share = 0.5
 alpha=1
-POP_SIZE = 1000 # population size
+POP_SIZE = 500 # population size
 MUT_RATE = 0.05  # mutation rate
 MAX_GEN = 20  # maximum generations
 f1_max = 1
@@ -588,7 +588,8 @@ def decode_results(all_best_solutions,fit_val):
 
 
 def update_features(feature_dict):
-    
+    MIN_VAL = [0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0.078] # min possible values of decision variables
+    MAX_VAL = [82, 1, 1, 272.0, 98.0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 122.0, 99, 846.0, 2.42] # max possible values of decision variables
     for i, entry in enumerate(feature_dict):
            
             if entry.strip().lower() in "gender":
