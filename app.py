@@ -91,7 +91,7 @@ if submit:
         i=1
         for row in response:
             print(row)
-            st.subheader(f"feature-{i} is {row[0]}")
+            st.subheader(f"feature-{i} is '{row[0]}'")
             i=i+1
     except ValueError:
         st.error("Please enter a valid input")
@@ -106,11 +106,11 @@ if submit1:
         print(query1)
         #st.text(f"SQL is {query1}")
         response1=read_sql_query(query1,"multi_diseases.db")
-        st.subheader('feature(s) made constant -- ')
-        for row in response1:
-            st.subheader(row[0])
+        f_list=[row[0] for row in response1]
+        st.subheader(f'feature(s) made constant -- {f_list}')
+       
 
-        st.subheader("The options for all selected features are --")
+        st.subheader("The options available for these features are --")
         i=1
         for row in response1:
             display_text = []
@@ -121,9 +121,9 @@ if submit1:
             if display_text:  # Check if there are any non-None elements to display
                 print(display_text)
                 if display_text[0].lower() == 'age':
-                    st.subheader(f"feature-{i} is {display_text[0]}")
+                    st.subheader(f"feature-{i} is '{display_text[0]}'")
                 else:
-                    st.subheader(f"feature-{i} is {display_text[0]} having option(s) {display_text[1:]}")
+                    st.subheader(f"feature-{i} is '{display_text[0]}' having option(s) {display_text[1:]}")
                 i += 1
     except ValueError:
         st.error("Please enter a valid input")

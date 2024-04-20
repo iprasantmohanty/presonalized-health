@@ -6,8 +6,10 @@ import math
 import pickle
 
 # Define the constants for distance calculation
-MIN_VAL = [0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0.078] # min possible values of decision variables
-MAX_VAL = [82, 1, 1, 272.0, 98.0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 122.0, 99, 846.0, 2.42] # max possible values of decision variables
+#MIN_VAL = [0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0.0, 0, 0.0, 0.078] # min possible values of decision variables
+#MAX_VAL = [82, 1, 1, 272.0, 98.0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 122.0, 99, 846.0, 2.42] # max possible values of decision variables
+MIN_VAL=[]
+MAX_VAL=[]
 sigma_share = 0.5
 alpha=1
 POP_SIZE = 500 # population size
