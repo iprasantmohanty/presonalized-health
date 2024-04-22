@@ -151,7 +151,10 @@ if submit2:
         #st.subheader("The Response is")
         #st.text(feature_dict)
         for feature, option in feature_dict.items():
-            st.subheader(f"'{feature}' is set to '{option}'")
+            if isinstance(option,(int,float))==True:
+                st.subheader(f"feature '{feature}' is set to {option}")
+            else:
+                st.subheader(f"feature '{feature}' is set to '{option}'")
         feature_list=list(feature_dict.keys())
         MIN_VAL, MAX_VAL=update_features(feature_dict)
         print(feature_list)
@@ -182,7 +185,7 @@ if submit4:
         #st.subheader("The Response is")
         #st.text(cont_feature_dict)
         for feature, option in cont_feature_dict.items():
-            st.subheader(f"'{feature}' is set to '{option}'")
+            st.subheader(f"feature '{feature}' is set to {option}")
         cont_feature_list=list(cont_feature_dict.keys())
         MIN_VAL, MAX_VAL=cont_update_features(cont_feature_dict)
         print(cont_feature_list)
