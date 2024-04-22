@@ -107,7 +107,7 @@ if submit1:
         #st.text(f"SQL is {query1}")
         response1=read_sql_query(query1,"multi_diseases.db")
         f_list=[row[0] for row in response1]
-        st.subheader(f'feature(s) made constant -- {f_list}')
+        st.subheader(f'feature(s) to be made constant -- {f_list}')
        
 
         st.subheader("The options available for these features are --")
